@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Portfolio Item</title>
+</head>
+<body>
+    <h1>Edit Portfolio Item</h1>
+    <form action="/portfolio/edit/<%= portfolio._id %>" method="POST">
+        <input type="text" name="title" value="<%= portfolio.title %>" required />
+        <textarea name="description" required><%= portfolio.description %></textarea>
+        <input type="text" name="images" value="<%= portfolio.images.join(',') %>" required />
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>

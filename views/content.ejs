@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1>Portfolio</h1>
+    <% if (user && user.role === 'admin') { %>
+        <a href="/portfolio/create">Add Portfolio Item</a>
+    <% } else if (user && user.role === 'editor') { %>
+        <a href="/portfolio/create">Add Portfolio Item</a>
+    <% } %>
+
+    <div class="portfolio-container">
+        <% portfolios.forEach(portfolio => { %>
+            <div class="portfolio-item">
+                <h2><%= portfolio.title %></h2>
+                <p><%= portfolio.description %></p>
+                <div class="carousel">
+                    <% portfolio.images.forEach(image => { %>
+                        <img src="/images/<%= image %>" alt="<%= portfolio.title %>" />
+                    <% }) %>
+                </div>
+                <p>Created At: <%= portfolio.createdAt.toDateString() %></p>
+                <p>Last Updated: <%= portfolio.updatedAt ? portfolio.updatedAt.toDateString() : 'Not Updated' %></p>
+
+                <% if (user && user.role === 'admin') { %>
+                    <form action="/portfolio/edit/<%= portfolio._id %>" method="GET">
+                        <button>Edit</button>
+                    </form>
+                    <form action="/portfolio/delete/<%= portfolio._id %>" method="POST">
+                        <button>Delete</button>
+                    </form>
+                <% } %>
+            </div>
+        <% }) %>
+    </div>
+</body>
+</html>

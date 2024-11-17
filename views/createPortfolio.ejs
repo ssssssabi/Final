@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create/Edit Portfolio Item</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1><%= portfolio ? 'Edit' : 'Create' %> Portfolio Item</h1>
+    <form action="/portfolio/create" method="POST">
+        <input type="text" name="title" placeholder="Title" value="<%= portfolio ? portfolio.title : '' %>" required />
+        <textarea name="description" placeholder="Description"><%= portfolio ? portfolio.description : '' %></textarea>
+        <input type="text" name="images" placeholder="Enter Image URLs (comma-separated)" value="<%= portfolio ? portfolio.images : '' %>" />
+        <button type="submit"><%= portfolio ? 'Update' : 'Create' %></button>
+    </form>
+</body>
+</html>

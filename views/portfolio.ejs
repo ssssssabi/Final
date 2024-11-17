@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1>Portfolio</h1>
+    
+    <% if (user && user.role === 'admin') { %>
+        <a href="/portfolio/create">Edit Portfolio Item</a>
+        <form action="/portfolio/delete/<%= portfolio._id %>" method="POST">
+            <button type="submit">Delete Portfolio Item</button>
+        </form>
+    <% } %>
+
+    <div class="portfolio-container">
+        <div class="portfolio-item">
+            <h2><%= portfolio.title %></h2>
+            <p><%= portfolio.description %></p>
+            <div class="carousel">
+                <% const images = portfolio.images.split(','); %>
+                <% images.forEach(image => { %>
+                    <img src="/images/<%= image.trim() %>" alt="<%= portfolio.title %>" />
+                <% }) %>
+            </div>
+            <p>Created At: <%= portfolio.createdAt.toDateString() %></p>
+            <p>Last Updated: <%= portfolio.updatedAt.toDateString() %></p>
+        </div>
+    </div>
+</body>
+</html>
